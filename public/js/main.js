@@ -86,11 +86,16 @@ document.addEventListener("click", closeAllSelect);
 
 const socket = io();
 const chatForm = document.getElementById('chat-form');
+const chatMessages = document.querySelector('.chat-messages');
 
 
 
 socket.on('message', message=>{
   console.log(message);
+
+  outputMessage(message);
+
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 })
 
 
@@ -101,4 +106,18 @@ chatForm.addEventListener('submit', (event) => {
 
 
   socket.emit('chatMsg', msg); 
+
+  event.target.elements.msg.value = '';
+  event.target.elements.msg.focus();
 })
+
+
+function outputMessage(message){
+  const div = document.createElement('div');
+  div.classList.add('message');
+  div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
+  <p class="text">
+    ${message.text}
+  </p>`;
+  document.querySelector('.chat-messages').appendChild(div);
+}

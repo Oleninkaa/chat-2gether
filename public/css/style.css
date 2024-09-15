@@ -127,7 +127,7 @@ input[type='text'] {
 .chat-messages .message {
 	padding: 10px;
 	margin-bottom: 15px;
-	background-color: var(--light-color);
+	background-color: var(--dark-color-a);
 	border-radius: 5px;
 }
 
