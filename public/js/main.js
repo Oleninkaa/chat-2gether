@@ -78,3 +78,27 @@ function closeAllSelect(elmnt) {
 /* If the user clicks anywhere outside the select box,
 then close all select boxes: */
 document.addEventListener("click", closeAllSelect);
+
+
+
+////////////////////////////////
+
+
+const socket = io();
+const chatForm = document.getElementById('chat-form');
+
+
+
+socket.on('message', message=>{
+  console.log(message);
+})
+
+
+chatForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const msg = event.target.elements.msg.value;
+
+
+  socket.emit('chatMsg', msg); 
+})
