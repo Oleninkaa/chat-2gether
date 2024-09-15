@@ -3,7 +3,7 @@ const path =  require('path');
 const http = require('http');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
-const {userJoin, getCurrentUser, userLeave, getRoom} = require('./utils/users');
+const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./utils/users');
 
 const app = express();
 const server = http.createServer(app);
@@ -24,9 +24,14 @@ io.on('connection', socket => {
         socket.join(user.room);
 
 
-        socket.emit('message', formatMessage(adminNm, 'Welcome'));
+        socket.emit('message',formatMessage(adminNm, 'Welcome'));
 
         socket.broadcast.to(user.room).emit('message', formatMessage(adminNm, `A ${user.username} has joined`));
+
+        io.to(user.room).emit('roomUsers', {
+            room: user.room,
+            users: getRoomUsers(user.room)
+        });
     });
 
     
@@ -37,6 +42,13 @@ io.on('connection', socket => {
         const user = getCurrentUser(socket.id);
 
         io.to(user.room).emit('message', formatMessage(user.username, msg));
+
+        console.log('---------------');
+        console.log(user.id);
+        console.log(socket.id);
+        // if(user.id === socket.id){
+            
+        // }
     });
 
     socket.on('disconnect', () => {
@@ -47,6 +59,11 @@ io.on('connection', socket => {
             io.to(user.room).emit(
                 'message',
                 formatMessage(adminNm, `A ${user.username} has left`));
+
+                io.to(user.room).emit('roomUsers', {
+                    room: user.room,
+                    users: getRoomUsers(user.room)
+                });
         }
 
         
