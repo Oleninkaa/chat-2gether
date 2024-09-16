@@ -1,19 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 :root {
-	--dark-color-a: #3f3f3f;
-	--dark-color-b: #686868;
-	--dark-color-c: #9a9a9a;
-	--light-color: #000000;
-	--success-color: #5ddf5d;
-	--error-color: #d9534f;
-	--white: #fff;
-
-
-	--dark: #181C14;
-	--dark-b: #3C3D37;
-	--accent: #697565;
-	--light: #ECDFCC;
+	--white: #ffffff;
+	--dark: #1E1E1E;
+	--dark-2: #262C36;
+	--dark-light: #38404C;
+	--base: #697486;
+	--base-m: rgba(105, 116, 134, 0.4);
+	--light: #A8BBC7;
+	--primary:#F7DAC5;
 }
 
 * {
@@ -25,7 +20,7 @@
 body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	background: var(--light-color);
+	background: var(--dark);
 	margin: 20px;
 }
 
@@ -41,11 +36,15 @@ input[type='text'] {
 	outline: none;
 	border: none;
 }
+
+input[type='text']::placeholder {
+	color: var(--dark-light);
+}
 .btn {
 	cursor: pointer;
 	padding: 5px 15px;
 	background: var(--white);
-	color: var(--light-color);
+	color: var(--dark);
 	font-size: 24px;
 	font-weight: 700;
 	border-radius: 20px;
@@ -55,20 +54,24 @@ input[type='text'] {
 }
 
 .form .btn:hover{
-	background-color: var(--dark-color-a);
+	background-color: var(--dark-2);
 	color: var(--white);
 }
 
 
 .chat-header .btn{
 	padding:  10px;
-	height: 50px;
+	height: 30px;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 }
 
 
 .btn:hover{
-	background-color: var(--dark-color-b);
+	background-color: var(--dark-light);
 	color: var(--white);
 }
 
@@ -79,15 +82,15 @@ input[type='text'] {
 
 .chat-container {
 	max-width: 1100px;
-	background: #fff;
+	
 	margin: 30px auto;
 	overflow: hidden;
 	border-radius:10px;
-	
+	border: none;
 }
 
 .chat-header {
-	background: var(--dark-color-a);
+	background: var(--dark-2);
 	color: #fff;
 	border-radius: 10px 10px 0px 0px;
 	padding: 15px;
@@ -100,10 +103,11 @@ input[type='text'] {
 .chat-main {
 	display: grid;
 	grid-template-columns: 1fr 3fr;
+	background-color: var(--white);
 }
 
 .chat-sidebar {
-	background: var(--dark-color-b);
+	background: var(--dark-light);
 	color: #fff;
 	padding: 20px 20px 60px;
 	overflow-y: scroll;
@@ -128,33 +132,125 @@ input[type='text'] {
 	padding: 30px;
 	max-height: 500px;
 	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
 }
 
 .chat-messages .message {
 	padding: 10px;
 	margin-bottom: 15px;
-	background-color: var(--dark-color-a);
+	background-color: var(--primary);
 	border-radius: 5px;
 }
 
 .chat-messages .message .meta {
 	font-size: 15px;
-	font-weight: bold;
-	color: var(--white);
+	font-weight: 700;
+	color: var(--dark-light);
 	opacity: 0.7;
 	margin-bottom: 7px;
 }
 
 .chat-messages .message .meta span {
-	color: var(--dark-color-c);
+	color: var(--base);
+	font-weight: 400;
 }
 .chat-messages .text {
-	color: var(--white);
+	color: var(--dark);
+	font-weight:400;
+	font-size: 16px;
 }
+
+.chat-messages .message-welcome,
+.chat-messages .message-join,
+.chat-messages .message-left{
+	height: 40px;
+	display: flex;
+	column-gap: 30px;
+	justify-content: space-between;
+	padding-right: 20px;
+	background-color: var(--base-m);
+	flex-direction: row-reverse;
+	
+}
+
+.chat-messages .message-welcome .text,
+.chat-messages .message-join .text,
+.chat-messages .message-left .text{
+	color: var(--white);
+	
+}
+
+.chat-messages .message-left .text,
+.chat-messages .message-join .text{
+	position: relative;
+	padding-left: 20px;
+}
+
+
+.chat-messages .message-left .text::before,
+.chat-messages .message-join .text::before{
+	content: '';
+	width: 15px;
+	height: 15px;
+	background:url('../img/face-sad.svg');
+	
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translate(0px, -50%);
+}
+
+.chat-messages .message-join .text::before{
+	background:url('../img/face-smile.svg');
+}
+
+
+
+.chat-messages .message-welcome {
+	background-color: var(--light);
+}
+
+.chat-messages .message-basic{
+	width: 40rem;
+}
+.chat-messages .message-basic .meta span{
+	color: var(--base);
+}
+
+.chat-messages .message-basic .meta{
+	color: var(--dark-light);
+}
+
+
+
+
+
+
+.chat-messages .message-current-user .meta span{
+	color: var(--dark-light);
+}
+
+.chat-messages .message-current-user .meta{
+	color: var(--dark-2);
+}
+
+.chat-messages .message-current-user{
+	background-color: var(--base);
+	align-self: flex-end;
+	
+}
+
+.chat-messages .message-current-user .text{
+	color: var(--white);
+	
+}
+
+
 
 .chat-form-container {
 	padding: 20px 30px;
-	background-color: var(--dark-color-a);
+	background-color: var(--dark-2);
 	
 	overflow: hidden;
 }
@@ -198,13 +294,13 @@ input[type='text'] {
 .join-header {
 	text-align: center;
 	padding: 20px;
-	background: var(--dark-color-a);
+	background: var(--dark-2);
 	border-radius:  10px 10px 0px 0px;
 }
 
 .join-main {
 	padding: 30px 40px;
-	background: var(--dark-color-b);
+	background: var(--dark-light);
 	
 	border-radius: 0px 0px 10px 10px;
 }
@@ -232,6 +328,8 @@ input[type='text'] {
 	border-radius: 10px;
 	font-weight: 500;
 	font-size: 16px;
+	background-color: var(--light);
+	color: var(--dark);
 }
 
 
@@ -248,7 +346,7 @@ input[type='text'] {
   }
   
   .select-selected {
-	background-color: var(--white);
+	background-color: var(--light);
 	border-radius: 10px;
 	overflow: hidden;
 	width: 100%;
@@ -269,12 +367,12 @@ input[type='text'] {
 	width: 0;
 	height: 0;
 	border: 6px solid transparent;
-	border-color: var(--light-color) transparent transparent transparent;
+	border-color: var(--dark) transparent transparent transparent;
   }
   
   /* Point the arrow upwards when the select box is open (active): */
   .select-selected.select-arrow-active:after {
-	border-color: transparent transparent  var(--light-color) transparent;
+	border-color: transparent transparent  var(--dark) transparent;
 	top: 50%;
 	right: 1rem;
 	transform: translate(0, -6px);
@@ -283,7 +381,7 @@ input[type='text'] {
   
   /* style the items (options), including the selected item: */
   .select-items div,.select-selected {
-	color:var(--light-color);
+	color:var(--dark);
 	padding: 12px 10px;
 	border: 1px solid transparent;
 	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -294,7 +392,7 @@ input[type='text'] {
   /* Style items (options): */
   .select-items {
 	position: absolute;
-	background-color: var(--white);
+	background-color: var(--light);
 	top: 100%;
 	left: 0;
 	right: 0;
@@ -317,7 +415,7 @@ input[type='text'] {
   }
   
   .select-items div:hover, .same-as-selected {
-	background-color: var(--dark-color-c);
+	background-color: var(--base);
   }
   
 
@@ -340,10 +438,6 @@ input[type='text'] {
 
 
 
-
-.chat-messages .message-join{
-	background-color: red;
-}
 
 
 

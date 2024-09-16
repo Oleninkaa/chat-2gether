@@ -24,9 +24,9 @@ io.on('connection', socket => {
         socket.join(user.room);
 
 
-        socket.emit('message',formatMessage(adminNm, 'Welcome', 'welcome'));
+        socket.emit('message',formatMessage(adminNm, `Welcome ${user.username}!`, 'welcome'));
 
-        socket.broadcast.to(user.room).emit('message', formatMessage(adminNm, `A ${user.username} has joined`,'join'));
+        socket.broadcast.to(user.room).emit('message', formatMessage(adminNm, `${user.username} has joined`,'join'));
 
         io.to(user.room).emit('roomUsers', {
             room: user.room,
@@ -58,7 +58,7 @@ io.on('connection', socket => {
         if(user){
             io.to(user.room).emit(
                 'message',
-                formatMessage(adminNm, `A ${user.username} has left`, "left"));
+                formatMessage(adminNm, `${user.username} has left`, "left"));
 
                 io.to(user.room).emit('roomUsers', {
                     room: user.room,

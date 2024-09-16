@@ -146,8 +146,13 @@ function outputMessage(message){
     div.classList.add('message-welcome');
   }
 
-  else if(message.type == "message" && username == message.username){
-    div.classList.add('message-current-user');
+  else if(message.type == "message"){
+    if(username == message.username){
+      div.classList.add('message-current-user');
+    }
+
+    div.classList.add('message-basic');
+   
   }
 
   
