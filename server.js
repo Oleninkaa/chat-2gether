@@ -24,9 +24,9 @@ io.on('connection', socket => {
         socket.join(user.room);
 
 
-        socket.emit('message',formatMessage(adminNm, 'Welcome'));
+        socket.emit('message',formatMessage(adminNm, 'Welcome', 'welcome'));
 
-        socket.broadcast.to(user.room).emit('message', formatMessage(adminNm, `A ${user.username} has joined`));
+        socket.broadcast.to(user.room).emit('message', formatMessage(adminNm, `A ${user.username} has joined`,'join'));
 
         io.to(user.room).emit('roomUsers', {
             room: user.room,
@@ -41,7 +41,7 @@ io.on('connection', socket => {
     socket.on('chatMsg', (msg) => {
         const user = getCurrentUser(socket.id);
 
-        io.to(user.room).emit('message', formatMessage(user.username, msg));
+        io.to(user.room).emit('message', formatMessage(user.username, msg, "message"));
 
         console.log('---------------');
         console.log(user.id);
@@ -58,7 +58,7 @@ io.on('connection', socket => {
         if(user){
             io.to(user.room).emit(
                 'message',
-                formatMessage(adminNm, `A ${user.username} has left`));
+                formatMessage(adminNm, `A ${user.username} has left`, "left"));
 
                 io.to(user.room).emit('roomUsers', {
                     room: user.room,

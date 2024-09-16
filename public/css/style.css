@@ -8,6 +8,12 @@
 	--success-color: #5ddf5d;
 	--error-color: #d9534f;
 	--white: #fff;
+
+
+	--dark: #181C14;
+	--dark-b: #3C3D37;
+	--accent: #697565;
+	--light: #ECDFCC;
 }
 
 * {
@@ -331,6 +337,13 @@ input[type='text'] {
 	}
 }
 
+
+
+
+
+.chat-messages .message-join{
+	background-color: red;
+}
 
 
 

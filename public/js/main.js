@@ -133,6 +133,24 @@ function outputMessage(message){
   <p class="text">
     ${message.text}
   </p>`;
+
+  if(message.type == "join"){
+    div.classList.add('message-join');
+  } 
+
+  else if(message.type == "left"){
+    div.classList.add('message-left');
+  }
+
+  else if(message.type == "welcome"){
+    div.classList.add('message-welcome');
+  }
+
+  else if(message.type == "message" && username == message.username){
+    div.classList.add('message-current-user');
+  }
+
+  
   
 
   document.querySelector('.chat-messages').appendChild(div);
