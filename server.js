@@ -40,15 +40,7 @@ io.on('connection', socket => {
 
     socket.on('chatMsg', (msg) => {
         const user = getCurrentUser(socket.id);
-
         io.to(user.room).emit('message', formatMessage(user.username, msg, "message"));
-
-        console.log('---------------');
-        console.log(user.id);
-        console.log(socket.id);
-        // if(user.id === socket.id){
-            
-        // }
     });
 
     socket.on('disconnect', () => {
